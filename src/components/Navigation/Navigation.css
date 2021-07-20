@@ -1,0 +1,147 @@
+.nav {
+  width: 100%;
+}
+
+.nav__menu-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.nav__nav-bar {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.nav__link {
+  font-size: 13px;
+  line-height: 1.38;
+  color: #000000;
+  text-decoration: none;
+  margin-right: 16px;
+  transition: opacity 0.2s;
+}
+
+.nav__link:last-of-type {
+  margin-right: 0;
+}
+
+.nav__link:hover {
+  opacity: 0.7;
+}
+
+.nav__link_main {
+  display: none;
+}
+
+.nav__link_active {
+  font-weight: 500;
+  cursor: default;
+}
+
+.nav__link_active:hover {
+  opacity: 1;
+}
+
+.nav__profile-link {
+  padding: 8px 20px;
+  background-color: #f4f4f4;
+  border-radius: 20px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.14;
+  color: #000000;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.nav__profile-link:hover {
+  opacity: 0.7;
+}
+
+.nav__close-menu-button {
+  display: none;
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  width: 38px;
+  height: 38px;
+  background: url('../../images/close-icon.svg') no-repeat center;
+  border: none;
+  padding: 0;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+}
+
+.nav__close-menu-button:hover {
+  cursor: pointer;
+  background-color: #f4f4f4;
+}
+
+@media screen and (max-width: 830px) {
+  .nav {
+    display: none;
+  }
+
+  .nav_menu-open {
+    display: flex;
+    justify-content: flex-end;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  .nav__menu-wrapper {
+    max-width: 520px;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    padding: 159px 0 90px;
+    background-color: #fafafa;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .nav__nav-bar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav__link {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.22;
+    margin: 0 0 22px;
+  }
+
+  .nav__link_main {
+    display: block;
+  }
+
+  .nav__link_active {
+    border-bottom: 2px solid #000000;
+  }
+
+  .nav__close-menu-button {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .nav__menu-wrapper {
+    padding: 144px 0 46px;
+  }
+
+  .nav__link {
+    margin-bottom: 24px;
+  }
+
+  .nav__close-menu-button {
+    top: 14px;
+    right: 14px;
+  }
+}

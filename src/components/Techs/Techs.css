@@ -1,0 +1,131 @@
+.techs {
+  background-color: #f5f5f5;
+}
+
+.techs__container {
+  max-width: 1280px;
+  width: 100%;
+  padding: 100px 70px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.techs__title {
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+  margin: 0 0 23px;
+}
+
+.techs__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-top: 1px solid black;
+  width: 100%;
+}
+
+.techs__heading {
+  font-weight: normal;
+  font-size: 50px;
+  line-height: 1.16;
+  text-align: center;
+  letter-spacing: -0.04em;
+  margin: 90px 0 26px;
+}
+
+.techs__text {
+  font-size: 14px;
+  line-height: 1.43;
+  text-align: center;
+  letter-spacing: -0.04em;
+  margin: 0 0 100px;
+  max-width: 460px;
+}
+
+.techs__grid-container {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(84px, 1fr));
+  gap: 10px;
+  justify-items: center;
+  max-width: 690px;
+  width: 100%;
+}
+
+.techs__tech {
+  width: 90px;
+  height: 60px;
+  background-color: #e8e8e8;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.techs__tech-text {
+  font-size: 14px;
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+
+@media screen and (max-width: 830px) {
+  .techs__container {
+    padding: 90px 50px;
+  }
+
+  .techs__heading {
+    margin: 80px 0 22px;
+  }
+
+  .techs__text {
+    font-size: 12px;
+    line-height: 1.5;
+    margin-bottom: 83px;
+  }
+
+  .techs__tech {
+    width: 84px;
+    height: 57px;
+  }
+
+  .techs__tech-text {
+    font-size: 12px;
+    line-height: 1.3;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .techs__container {
+    padding: 70px 18px;
+    background-color: #fafafa;
+  }
+
+  .techs__title {
+    font-size: 18px;
+    line-height: 1.1;
+    margin-bottom: 28px;
+  }
+
+  .techs__heading {
+    margin: 60px 0 24px;
+    font-size: 30px;
+    line-height: 1.2;
+  }
+
+  .techs__text {
+    font-size: 11px;
+    line-height: 1.45;
+    margin-bottom: 50px;
+    max-width: 292px;
+  }
+
+  .techs__grid-container {
+    max-width: 178px;
+    justify-items: center;
+  }
+}

@@ -1,0 +1,167 @@
+.about {
+  background-color: #fafafa;
+}
+
+.about__container {
+  margin: 0 auto;
+  padding: 110px 70px 80px;
+}
+
+.about__title {
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+  margin: 0 0 23px;
+}
+
+.about__info-container {
+  border-top: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 66px;
+}
+
+.about__text-container {
+  margin-right: 49px;
+}
+
+.about__name {
+  font-weight: normal;
+  font-size: 50px;
+  line-height: 1.16;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+
+.about__description {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.11;
+  mix-blend-mode: normal;
+  margin: 18px 0 26px;
+}
+
+.about__text {
+  font-size: 14px;
+  line-height: 1.57;
+  mix-blend-mode: normal;
+  margin: 0 0 99px;
+  max-width: 600px;
+}
+
+.about__link-container {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.about__link {
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.about__link:last-of-type {
+  margin-right: 0;
+}
+
+.about__link-item {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.2px;
+  margin: 0;
+  color: #000000;
+  text-decoration: none;
+  transition: opacity 0.35s;
+}
+
+.about__link-item:hover {
+  opacity: 0.7;
+}
+
+.about__image {
+  object-fit: cover;
+  object-position: center;
+  width: 270px;
+  height: 327px;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 830px) {
+  .about__container {
+    padding: 90px 50px 70px;
+  }
+
+  .about__name {
+    font-size: 40px;
+    line-height: 1;
+  }
+
+  .about__description {
+    font-size: 12px;
+    line-height: 1.5;
+    margin: 16px 0 20px;
+  }
+
+  .about__text {
+    font-size: 12px;
+    line-height: 1.5;
+    margin-bottom: 87px;
+  }
+
+  .about__image {
+    width: 255px;
+    height: 307px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .about__container {
+    padding: 70px 14px 44px;
+  }
+
+  .about__title {
+    font-size: 18px;
+    line-height: 1.15;
+    margin-bottom: 28px;
+  }
+
+  .about__info-container {
+    align-items: center;
+    flex-direction: column-reverse;
+    padding-top: 60px;
+  }
+
+  .about__text-container {
+    margin: 40px 0 0;
+  }
+
+  .about__name {
+    font-size: 30px;
+    line-height: 1.2;
+  }
+
+  .about__description {
+    font-size: 11px;
+    line-height: 1.45;
+    margin: 20px 0;
+  }
+
+  .about__text {
+    font-size: 11px;
+    line-height: 1.45;
+    margin-bottom: 40px;
+  }
+
+  .about__image {
+    width: 292px;
+    height: 352px;
+  }
+
+  .about__link {
+    margin-right: 26px;
+    margin-bottom: 26px;
+  }
+}
