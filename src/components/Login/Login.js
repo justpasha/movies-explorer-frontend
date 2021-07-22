@@ -1,9 +1,13 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import AuthForm from '../AuthForm/AuthForm';
 
 function Register() {
+  const history = useHistory();
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    history.push('/movies');
   };
 
   return (
