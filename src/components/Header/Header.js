@@ -40,7 +40,7 @@ function Header() {
             </div>
           </Route>
           <Route path="/">
-            <Navigation isOpen={isMenuOpen} handleCloseMenu={toggleMenu} />
+            <Navigation isOpen={isMenuOpen} onMenuClose={toggleMenu} />
             <button
               className="header__burger-button"
               type="button"

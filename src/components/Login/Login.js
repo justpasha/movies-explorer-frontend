@@ -24,11 +24,17 @@ function Register() {
         type="email"
         id="email"
         placeholder="pochta@yandex.ru"
+        required
       />
       <label className="auth-page__label" htmlFor="password">
         Пароль
       </label>
-      <input className="auth-page__input" type="password" id="password" />
+      <input
+        className="auth-page__input"
+        type="password"
+        id="password"
+        required
+      />
     </AuthForm>
   );
 }

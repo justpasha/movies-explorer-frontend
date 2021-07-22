@@ -1,0 +1,52 @@
+.checkbox__item {
+  width: 36px;
+  height: 20px;
+  border: none;
+}
+
+.checkbox__hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.checkbox__visible {
+  display: inline-block;
+  vertical-align: middle;
+  width: 36px;
+  height: 20px;
+  margin-right: 12px;
+  border-radius: 20px;
+  background-image: url('../../images/tumb-unactive.svg');
+  transition: 0.3s;
+}
+
+.checkbox__hidden:checked + .checkbox__visible {
+  background-image: url('../../images/tumb-active.svg');
+}
+
+.checkbox__hidden:hover + .checkbox__visible {
+  cursor: pointer;
+}
+
+.checkbox__hidden:disabled + .checkbox__visible {
+  background-image: url('../../images/tumb-unactive.svg');
+}
+
+.checkbox__hidden:focus + .checkbox__visible {
+  box-shadow: 0 0 5px #f4f4f4;
+}
+
+.checkbox__label-text {
+  font-size: 14px;
+  line-height: 1.29;
+}
+
+@media screen and (max-width: 500px) {
+  .checkbox__label-text {
+    font-size: 11px;
+    line-height: 1.64;
+  }
+}

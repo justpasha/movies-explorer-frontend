@@ -25,6 +25,7 @@ function Register() {
         minLength="2"
         maxLength="30"
         placeholder="Павел"
+        required
       />
       <label className="auth-page__label" htmlFor="email">
         E-mail
@@ -34,11 +35,20 @@ function Register() {
         type="email"
         id="email"
         placeholder="pochta@yandex.ru"
+        required
       />
       <label className="auth-page__label" htmlFor="password">
         Пароль
       </label>
-      <input className="auth-page__input" type="password" id="password" />
+      <input
+        className="auth-page__input auth-page__input_type_error"
+        type="password"
+        id="password"
+        required
+      />
+      <span className="auth-page__span-input-error">
+        Что-то пошло не так...
+      </span>
     </AuthForm>
   );
 }

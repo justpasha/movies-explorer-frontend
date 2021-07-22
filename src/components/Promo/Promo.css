@@ -52,14 +52,14 @@
   border-radius: 3px;
   width: 129px;
   height: 36px;
-  transition: opacity 0.35s;
+  transition: opacity 0.25s;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .promo__button:hover {
-  opacity: 0.6;
+  opacity: 0.8;
 }
 
 @media screen and (max-width: 860px) {

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import './Navigation.css';
 
-function Navigation({ isOpen, handleCloseMenu }) {
+function Navigation({ isOpen, onMenuClose }) {
   return (
     <div className={`nav ${isOpen ? 'nav_menu-open' : ''}`}>
       <div className="nav__menu-wrapper">
@@ -16,7 +16,7 @@ function Navigation({ isOpen, handleCloseMenu }) {
             Главная
           </NavLink>
           <NavLink
-            onClick={handleCloseMenu}
+            onClick={onMenuClose}
             to="/movies"
             activeClassName="nav__link_active"
             className="nav__link"
@@ -24,7 +24,7 @@ function Navigation({ isOpen, handleCloseMenu }) {
             Фильмы
           </NavLink>
           <NavLink
-            onClick={handleCloseMenu}
+            onClick={onMenuClose}
             to="/saved-movies"
             activeClassName="nav__link_active"
             className="nav__link"
@@ -32,15 +32,11 @@ function Navigation({ isOpen, handleCloseMenu }) {
             Сохранённые фильмы
           </NavLink>
         </nav>
-        <Link
-          onClick={handleCloseMenu}
-          to="/profile"
-          className="nav__profile-link"
-        >
+        <Link onClick={onMenuClose} to="/profile" className="nav__profile-link">
           Аккаунт
         </Link>
         <button
-          onClick={handleCloseMenu}
+          onClick={onMenuClose}
           className="nav__close-menu-button"
           type="button"
         />
