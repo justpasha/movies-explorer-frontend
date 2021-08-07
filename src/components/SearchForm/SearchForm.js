@@ -11,7 +11,7 @@ function SearchForm() {
     <section className="search-form">
       <form className="search-form__form" onSubmit={handleSubmit}>
         <div className="search-form__wrapper">
-          <input className="search-form__input" placeholder="Фильм" />
+          <input className="search-form__input" placeholder="Фильм" required />
           <button className="search-form__button" type="submit" />
         </div>
         <FilterCheckbox />
