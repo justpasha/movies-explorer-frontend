@@ -88,6 +88,16 @@
   cursor: pointer;
 }
 
+.auth-page__button_disabled {
+  background-color: #f8f8f8;
+  color: #c2c2c2;
+}
+
+.auth-page__button_disabled:hover {
+  cursor: auto;
+  opacity: 1;
+}
+
 .auth-page__button_login {
   margin-top: 179px;
 }

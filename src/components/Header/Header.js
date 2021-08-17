@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Route, Link, Switch, useRouteMatch } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
 import logo from '../../images/logo.svg';
 import './Header.css';
 
-function Header() {
+function Header({ isLoggedIn }) {
   const isMain = useRouteMatch({ path: '/', exact: true });
   const isMovies = useRouteMatch({ path: '/movies' });
   const isSavedMovies = useRouteMatch({ path: '/saved-movies' });
@@ -28,26 +28,25 @@ function Header() {
         <Link to="/" className="header__logo-link">
           <img src={logo} alt="лого" className="header__logo-image" />
         </Link>
-        <Switch>
-          <Route path="/" exact>
-            <div className="header__button-container">
-              <Link to="/signup" className="header__register-button">
-                Регистрация
-              </Link>
-              <Link to="/signin" className="header__login-button">
-                Войти
-              </Link>
-            </div>
-          </Route>
-          <Route path="/">
+        {isLoggedIn ? (
+          <>
             <Navigation isOpen={isMenuOpen} onMenuClose={toggleMenu} />
             <button
               className="header__burger-button"
               type="button"
               onClick={toggleMenu}
             />
-          </Route>
-        </Switch>
+          </>
+        ) : (
+          <div className="header__button-container">
+            <Link to="/signup" className="header__register-button">
+              Регистрация
+            </Link>
+            <Link to="/signin" className="header__login-button">
+              Войти
+            </Link>
+          </div>
+        )}
       </div>
     </header>
   );

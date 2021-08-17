@@ -1,18 +1,37 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './MoviesCard.css';
 
 function MoviesCard({
-  isSave,
+  movie,
+  onMovieSave,
   moviePhoto,
   movieName,
-  movieDuration,
   movieLink,
+  duration,
+  onMovieDelete,
+  savedMovies,
 }) {
-  const [isMovieSave, setMovieSave] = useState(false);
+  const minutes = duration % 60;
+  const hours = Math.floor(duration / 60);
+
+  function isMovieSave() {
+    if (!savedMovies) {
+      return false;
+    }
+    return savedMovies.some((savedMovie) => savedMovie.movieId === movie.id);
+  }
 
   function handleSave() {
-    setMovieSave(true);
+    onMovieSave(movie);
+  }
+
+  function handleDelete() {
+    onMovieDelete(movie.id);
+  }
+
+  function handleSavedMovieDelete() {
+    onMovieDelete(movie);
   }
 
   return (
@@ -20,20 +39,21 @@ function MoviesCard({
       <div className="movie__info-container">
         <div className="movie__text-container">
           <h2 className="movie__title">{movieName}</h2>
-          <p className="movie__duration">{movieDuration}</p>
+          <p className="movie__duration">{`${hours}ч ${minutes}м`}</p>
         </div>
         <Switch>
           <Route path="/movies">
             <button
               className={`movie__button ${
-                isSave || isMovieSave ? 'movie__button_saved' : ''
+                isMovieSave() ? 'movie__button_saved' : ''
               }`}
               type="button"
-              onClick={handleSave}
+              onClick={isMovieSave() ? handleDelete : handleSave}
             />
           </Route>
           <Route path="/saved-movies">
             <button
+              onClick={handleSavedMovieDelete}
               className="movie__button movie__button_delete"
               type="button"
             />

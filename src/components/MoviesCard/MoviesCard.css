@@ -16,6 +16,10 @@
   font-weight: 500;
   font-size: 15px;
   line-height: 1.2;
+  max-width: 260px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .movie__duration {
@@ -76,6 +80,10 @@
 @media screen and (max-width: 500px) {
   .movie {
     width: 300px;
+  }
+
+  .movie__title {
+    max-width: 240px;
   }
 
   .movie__image {
