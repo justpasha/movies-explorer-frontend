@@ -10,6 +10,7 @@ function SavedMovies({ savedMovies, onMovieDelete }) {
   const [isSearch, setIsSearch] = useState(false);
   const [movieFilterWord, setMovieFilterWord] = useState('');
   const [filteredMovieList, setFilteredMovieList] = useState([]);
+  const [isNothingFound, setIsNothingFound] = useState(false);
 
   useEffect(() => {
     renderMovies();
@@ -19,13 +20,20 @@ function SavedMovies({ savedMovies, onMovieDelete }) {
     if (!isSearch) {
       return;
     }
-    setFilteredMovieList(wordFilter());
+    const filteredArr = wordFilter();
+    setFilteredMovieList(filteredArr);
+    moviesCountCheck(filteredArr);
+    if (isCheckboxActive) {
+      checkboxActiveCheck(filteredArr);
+    }
     setIsSearch(false);
   }, [isSearch]);
 
   useEffect(() => {
+    setIsNothingFound(false);
     if (isCheckboxActive) {
       setFilteredMovieList(durationFilter());
+      moviesCountCheck(durationFilter());
     } else {
       renderMovies();
     }
@@ -40,17 +48,23 @@ function SavedMovies({ savedMovies, onMovieDelete }) {
   };
 
   const renderMovies = () => {
+    setIsNothingFound(false);
     if (movieFilterWord !== '') {
-      setFilteredMovieList(checkboxActiveCheck(wordFilter()));
+      const arr = checkboxActiveCheck(wordFilter());
+      setFilteredMovieList(arr);
+      moviesCountCheck(arr);
     } else {
       setFilteredMovieList(checkboxActiveCheck(savedMovies));
+      moviesCountCheck(checkboxActiveCheck(savedMovies));
     }
   };
 
   const checkboxActiveCheck = (arr) => {
     if (isCheckboxActive) {
+      moviesCountCheck(filterByDuration(arr));
       return filterByDuration(arr);
     }
+    moviesCountCheck(arr);
     return arr;
   };
 
@@ -67,13 +81,21 @@ function SavedMovies({ savedMovies, onMovieDelete }) {
     setIsSearch(true);
   };
 
+  const moviesCountCheck = (arr) => {
+    if (arr.length === 0) {
+      setIsNothingFound(true);
+    } else {
+      setIsNothingFound(false);
+    }
+  };
+
   return (
     <div className="saved-movies">
       <SearchForm
         onMovieSearch={handleMovieSearch}
         onCheckboxClick={checkboxToggle}
       />
-      <MoviesCardList>
+      <MoviesCardList isNothingFound={isNothingFound}>
         {filteredMovieList.map((movie) => (
           <MoviesCard
             movie={movie}

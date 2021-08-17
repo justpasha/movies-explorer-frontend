@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import './MoviesCard.css';
 
 function MoviesCard({
@@ -11,15 +11,26 @@ function MoviesCard({
   duration,
   onMovieDelete,
   savedMovies,
+  movieNumber,
+  onMovieRender,
 }) {
   const minutes = duration % 60;
   const hours = Math.floor(duration / 60);
+
+  const isMoviesPage = useRouteMatch({ path: '/movies' });
 
   function isMovieSave() {
     if (!savedMovies) {
       return false;
     }
     return savedMovies.some((savedMovie) => savedMovie.movieId === movie.id);
+  }
+
+  function onRender() {
+    if (!movieNumber) {
+      return;
+    }
+    return onMovieRender(movieNumber);
   }
 
   function handleSave() {
@@ -35,7 +46,9 @@ function MoviesCard({
   }
 
   return (
-    <article className="movie">
+    <article
+      className={`movie ${!onRender() && isMoviesPage ? 'movie_hidden' : ''}`}
+    >
       <div className="movie__info-container">
         <div className="movie__text-container">
           <h2 className="movie__title">{movieName}</h2>

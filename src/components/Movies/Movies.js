@@ -14,23 +14,39 @@ function Movies({ onPopupOpen, onMovieSave, savedMovies, onMovieDelete }) {
   const [isCheckboxActive, setIsCheckboxActive] = useState(false);
   const [isNothingFound, setIsNothingFound] = useState(false);
   const [isMoreButtonEnable, setIsMoreButtonEnable] = useState(false);
+  const [moviesNumbers, setMoviesNumbers] = useState([]);
+  const [cardsCount, setCardsCount] = useState(0);
+  const [AddCardsCount, setAddCardsCount] = useState(0);
 
-  const [cardsCount, setCardsCount] = useState(12);
-  const [AddCardsCount, setAddCardsCount] = useState(3);
+  const onResize = () => {
+    window.addEventListener('resize', resizeThrottler, false);
 
-  window.addEventListener('resize', () => {
-    setTimeout(() => {
-      widthDefine();
-    }, 10000);
-  });
+    let resizeTimeout;
+    function resizeThrottler() {
+      if (!resizeTimeout) {
+        resizeTimeout = setTimeout(() => {
+          resizeTimeout = null;
+          actualResizeHandler();
+        }, 10000);
+      }
+    }
+
+    const actualResizeHandler = () => {
+      widthDefine(
+        cardsCount > 12 ? cardsCount : 12,
+        cardsCount > 8 ? cardsCount : 8,
+        cardsCount > 5 ? cardsCount : 5
+      );
+    };
+  };
 
   useEffect(() => {
-    widthDefine();
+    widthDefine(12, 8, 5);
     if (!localStorage.getItem('movieData')) {
-      setIsPreloader(true);
       return;
     }
     renderMovies(localStorage.getItem('movieFilter'));
+    onResize();
   }, []);
 
   useEffect(() => {
@@ -43,7 +59,6 @@ function Movies({ onPopupOpen, onMovieSave, savedMovies, onMovieDelete }) {
       const filteredArr = filterByDuration(movies);
       setMovies(filteredArr);
       moviesCountCheck(filteredArr);
-      showButton(filteredArr);
     } else {
       renderMovies(localStorage.getItem('movieFilter'));
     }
@@ -53,10 +68,23 @@ function Movies({ onPopupOpen, onMovieSave, savedMovies, onMovieDelete }) {
     setIsCheckboxActive(!isCheckboxActive);
   };
 
+  useEffect(() => {
+    setIsMoreButtonEnable(false);
+    if (movies.length > 3) {
+      setIsMoreButtonEnable(true);
+    }
+    if (cardsCount >= movies.length) {
+      setIsMoreButtonEnable(false);
+    }
+    setMoviesNumbers([moviesNumbers, moviesNumbers.push()]);
+  }, [movies]);
+
   const handleMovieSearch = (movieWordFilter) => {
+    widthDefine(12, 8, 5);
     setIsNothingFound(false);
     localStorage.setItem('movieFilter', movieWordFilter);
     if (!localStorage.getItem('movieData')) {
+      setIsPreloader(true);
       getAllMovies()
         .then((moviesData) => {
           localStorage.setItem(
@@ -66,7 +94,6 @@ function Movies({ onPopupOpen, onMovieSave, savedMovies, onMovieDelete }) {
           const filteredArr = filterByTitle(moviesData, movieWordFilter);
           moviesCountCheck(filteredArr);
           setMovies(filteredArr);
-          showButton(filteredArr);
         })
         .catch((err) => {
           onPopupOpen(serverError);
@@ -86,11 +113,9 @@ function Movies({ onPopupOpen, onMovieSave, savedMovies, onMovieDelete }) {
       const filteredByTimeArr = filterByDuration(filteredArr);
       setMovies(filteredByTimeArr);
       moviesCountCheck(filteredByTimeArr);
-      showButton(filteredByTimeArr);
     } else {
       setMovies(filteredArr);
       moviesCountCheck(filteredArr);
-      showButton(filteredArr);
     }
   };
 
@@ -127,33 +152,27 @@ function Movies({ onPopupOpen, onMovieSave, savedMovies, onMovieDelete }) {
     renderMovies(localStorage.getItem('movieFilter'));
   };
 
-  const widthDefine = () => {
-    if (document.documentElement.clientWidth >= 1280) {
-      setCardsCount(12);
+  const widthDefine = (maxCount, middleCount, minCount) => {
+    if (document.documentElement.clientWidth >= 1268) {
+      setCardsCount(maxCount);
       setAddCardsCount(3);
     }
     if (
       document.documentElement.clientWidth <= 1267 &&
       document.documentElement.clientWidth >= 768
     ) {
-      setCardsCount(8);
+      setCardsCount(middleCount);
       setAddCardsCount(2);
     }
     if (document.documentElement.clientWidth < 768) {
-      setCardsCount(5);
+      setCardsCount(minCount);
       setAddCardsCount(2);
     }
   };
 
-  const showButton = (arr) => {
-    if (arr.length > 3) {
-      setIsMoreButtonEnable(true);
-    } else {
-      setIsMoreButtonEnable(false);
-    }
-
-    if (movies.length === arr.length) {
-      setIsMoreButtonEnable(false);
+  const movieRender = (movieNumber) => {
+    if (movieNumber <= cardsCount) {
+      return true;
     }
   };
 
@@ -169,23 +188,21 @@ function Movies({ onPopupOpen, onMovieSave, savedMovies, onMovieDelete }) {
         onMoreClick={handleMoreClick}
         isButtonEnable={isMoreButtonEnable}
       >
-        {movies.map((movie, number) => {
-          if (number < cardsCount) {
-            return (
-              <MoviesCard
-                movie={movie}
-                key={movie.id}
-                duration={movie.duration}
-                movieName={movie.nameRU}
-                movieLink={movie.trailerLink}
-                moviePhoto={`https://api.nomoreparties.co${movie.image.url}`}
-                onMovieSave={handleMovieSave}
-                onMovieDelete={handleMovieDelete}
-                savedMovies={savedMovies}
-              />
-            );
-          }
-        })}
+        {movies.map((movie, number) => (
+          <MoviesCard
+            movie={movie}
+            key={movie.id}
+            duration={movie.duration}
+            movieName={movie.nameRU}
+            movieLink={movie.trailerLink}
+            moviePhoto={`https://api.nomoreparties.co${movie.image.url}`}
+            onMovieSave={handleMovieSave}
+            onMovieDelete={handleMovieDelete}
+            savedMovies={savedMovies}
+            movieNumber={number + 1}
+            onMovieRender={movieRender}
+          />
+        ))}
       </MoviesCardList>
     </div>
   );

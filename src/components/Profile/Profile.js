@@ -9,7 +9,7 @@ function Profile({ onLogout, onProfileUpdate, currentUser }) {
 
   useEffect(() => {
     if (currentUser) {
-      resetFrom(currentUser, {}, true);
+      resetFrom(currentUser, {}, false);
     }
   }, [currentUser, resetFrom]);
 
@@ -21,7 +21,7 @@ function Profile({ onLogout, onProfileUpdate, currentUser }) {
     e.preventDefault();
     onProfileUpdate(values);
     setIsEditing(false);
-    resetFrom(currentUser, {}, true);
+    resetFrom(currentUser, {}, false);
   };
 
   const handleLogout = () => {
