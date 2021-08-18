@@ -12,13 +12,20 @@ function AuthForm({
   linkPath,
   onSubmit,
   loginPage,
+  name,
+  isDisabled = false,
 }) {
   return (
     <div className="auth-page">
       <Link to="/" className="auth-page__logo-link">
         <img src={logo} alt="лого" className="auth-page__logo-image" />
       </Link>
-      <form className="auth-page__form" noValidate onSubmit={onSubmit}>
+      <form
+        className="auth-page__form"
+        name={name}
+        noValidate
+        onSubmit={onSubmit}
+      >
         <div className="auth-page__wrapper">
           <h2 className="auth-page__title">{title}</h2>
           {children}
@@ -26,9 +33,10 @@ function AuthForm({
         <div className="auth-page__wrapper">
           <button
             className={`auth-page__button ${
-              loginPage ? 'auth-page__button_login' : ''
-            }`}
+              isDisabled && 'auth-page__button_disabled'
+            } ${loginPage ? 'auth-page__button_login' : ''}`}
             type="submit"
+            disabled={isDisabled}
           >
             {buttonText}
           </button>
