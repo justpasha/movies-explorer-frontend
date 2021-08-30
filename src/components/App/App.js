@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import { CurrenUserContext } from '../../contexts/CurrentUserContext';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -157,10 +157,18 @@ function App() {
             <Main />
           </Route>
           <Route path="/signup">
-            <Register onRegister={handleRegister} />
+            {loggedIn ? (
+              <Redirect to="/movies" />
+            ) : (
+              <Register onRegister={handleRegister} />
+            )}
           </Route>
           <Route path="/signin">
-            <Login onLogin={handleLogin} />
+            {loggedIn ? (
+              <Redirect to="/movies" />
+            ) : (
+              <Login onLogin={handleLogin} />
+            )}
           </Route>
           <ProtectedRoute
             path="/movies"
