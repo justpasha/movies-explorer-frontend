@@ -28,7 +28,7 @@ function Portfolio() {
           <li className="portfolio__link-item">
             <p className="portfolio__name">Одностраничное приложение</p>
             <a
-              href="https://mesto.sproject.nomoredomains.monster/"
+              href="https://github.com/justpasha"
               target="_blank"
               rel="noreferrer"
               className="portfolio__link"
